@@ -1,26 +1,31 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+import Login from './components/auth/login.js';
+import Header from './components/header.js';
+import CreatePost from './components/createPost.js';
+import PostList from './components/postList.js';
+
+
+const App = () => {
+	const [user, setUser] = React.useState('');
+	const [posts, setPosts] = React.useState('');
+
+	if ( !user ) return <Login setUser={ setUser } />
+
+	return (
+		<>
+			<Header 
+				user={ user } 
+				setUser={ setUser } />
+			<div>App</div>
+			<CreatePost 
+				user={ user }
+				posts={ posts } 
+				setPosts={ setPosts } />
+			{ posts.length && <PostList user={ user } posts={ posts } /> }
+		</>
+	)
+};
+
 
 export default App;
